@@ -59,3 +59,13 @@ class ChangePasswordAPIView(APIView):
             return Response({"detail": "Password updated successfully."})
         return Response(serializer.errors, status=400)
 
+class AdminUserListAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.role == 'ADMIN':
+            return User.objects.all()
+        return User.objects.filter(id=self.request.user.id)
+
