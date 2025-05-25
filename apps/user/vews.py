@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 
 class RegisterUserAPIView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related('rent_owner')
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]
 

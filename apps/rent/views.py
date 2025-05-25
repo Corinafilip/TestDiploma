@@ -6,7 +6,7 @@ from .serializer import RentSerializer
 
 
 class RentListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Rent.objects.all()
+    queryset = Rent.objects.select_related('owner').all()
     serializer_class = RentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
