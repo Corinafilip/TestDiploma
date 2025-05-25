@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Rent
 from django.shortcuts import render
-#from .permissions import IsOwnerOrReadOnly
+from .permissions import IsRentOwnerOrReadOnly
 from .serializer import RentSerializer
 
 
@@ -17,7 +17,7 @@ class RentListCreateAPIView(generics.ListCreateAPIView):
 class RentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rent.objects.all()
     serializer_class = RentSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly ] #IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsRentOwnerOrReadOnly]
 
 
 

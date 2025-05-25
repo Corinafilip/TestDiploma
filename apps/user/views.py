@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
 from .serializers import UserRegistrationSerializer, UserSerializer
+from apps.user.owner_permission import IsRentOwnerOrReadOnly
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -69,3 +70,7 @@ class AdminUserListAPIView(generics.ListAPIView):
             return User.objects.all()
         return User.objects.filter(id=self.request.user.id)
 
+class RentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Rent.objects.all()
+    serializer_class = RentSerializer
+    permission_classes = [IsAuthenticated, IsRentOwnerOrReadOnly]
