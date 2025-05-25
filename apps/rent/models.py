@@ -18,3 +18,8 @@ class Rent(models.Model):
     total_price = models.DecimalField(decimal_places=2, max_digits=6)
     score = models.DecimalField(decimal_places=2, max_digits=1)
     reviews = models.PositiveIntegerField(default=0)
+    is_deleted = models.BooleanField(default=False)
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True
+        self.save()
