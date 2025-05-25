@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # local
     'apps.rent.apps.RentConfig',
     #'apps.user.apps.UserConfig',
+    #'apps.bookings.apps.BookingsConfig',
 
 ]
 
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'books.middleware.jwt_helper.JWTAuthenticationMiddleware',
+    'books.middleware.jwt_helper.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'TestDiploma.urls'
