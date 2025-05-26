@@ -17,7 +17,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import (
+from apps.user.views import (
     RegisterUserAPIView, CurrentUserAPIView, LogoutView,
     UpdateUserAPIView, ChangePasswordAPIView, AdminUserListAPIView
 )
@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/user/', include('apps.user.urls')),
     path('api/bookings/', include('apps.bookings.urls')),
     path('api/search/', include('apps.search_and_filter.urls')),
+    path('api/rent/', include('apps.rent.urls')),
 
 
 ]
