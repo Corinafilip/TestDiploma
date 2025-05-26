@@ -32,14 +32,6 @@ class BookingReceivedListView(generics.ListAPIView):
     def get_queryset(self):
         return Booking.objects.select_related('rent', 'owner', 'renter').filter(owner=self.request.user)
 
-
-class CancelBookingView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request, booking_id):
-        ...
-
-
 class CancelBookingView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -61,6 +53,30 @@ class CancelBookingView(APIView):
         booking.save()
 
         return Response({"detail": "Booking successfully cancelled."}, status=200)
+
+class ConfirmBookingView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, booking_id):
+        try:
+            booking = Booking.objects.select_related('title__owner').get(id=booking_id)
+        except Booking.DoesNotExist:
+            return Response({"detail": "Booking not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        if booking.title.owner != request.user:
+            return Response({"detail": "You are not the owner of this rent."}, status=status.HTTP_403_FORBIDDEN)
+
+        action = request.data.get('action')
+        if action not in ['approve', 'reject']:
+            return Response({"detail": "Invalid action. Use 'approve' or 'reject'."}, status=400)
+
+        booking.is_confirmed = True if action == 'approve' else False
+        booking.confirmed_at = timezone.now()
+        booking.save()
+
+        return Response({"detail": f"Booking {'approved' if booking.is_confirmed else 'rejected'}."}, status=200)
+
+
 
 #if not can_cancel(booking):
 #    ...

@@ -19,6 +19,7 @@ class Booking(models.Model):
     is_cancelled = models.BooleanField(default=False)
     cancelled_at = models.DateTimeField(null=True, blank=True)
     is_confirmed = models.BooleanField(default=False)
+    confirmed_at = models.DateTimeField(null=True, blank=True)
 
     renter = models.ForeignKey(
         settings.AUTH_USER_MODEL,
