@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
 
+
     # 3-rd party
     'rest_framework',
     'rest_framework_simplejwt',
@@ -57,6 +58,8 @@ INSTALLED_APPS = [
     'apps.rent.apps.RentConfig',
     #'apps.user.apps.UserConfig',
     #'apps.bookings.apps.BookingsConfig',
+
+    'apps.user',
 
 ]
 
@@ -149,7 +152,7 @@ SWAGGER_SETTINGS = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'bookings.paginators.CustomCursorPagination',
+    'DEFAULT_PAGINATION_CLASS': 'apps.bookings.paginators.CustomCursorPagination',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.TokenAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',

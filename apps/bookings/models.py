@@ -22,6 +22,7 @@ class Booking(models.Model):
     confirmed_at = models.DateTimeField(null=True, blank=True)
 
 
+
     renter = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
