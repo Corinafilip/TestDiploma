@@ -1,8 +1,11 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin, UserManager
+#from django.contrib.auth.models import PermissionsMixin, UserManager
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group, Permission
+
+from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -21,6 +24,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+
+    groups = models.ManyToManyField(
+        Group,
+        related_name='custom_user_set',  # <-- change this to avoid clash
+        blank=True,
+        help_text='The groups this user belongs to.',
+        related_query_name='user',
+    )
+
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='custom_user_set',  # <-- change this to avoid clash
+        blank=True,
+        help_text='Specific permissions for this user.',
+        related_query_name='user',
+    )
+
 
     objects = UserManager()
 

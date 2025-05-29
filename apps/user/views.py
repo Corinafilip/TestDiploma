@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
+from apps.rent.serializer import RentSerializer
 from apps.rent.models import Rent
 from .serializers import UserRegistrationSerializer, UserSerializer
 from apps.user.owner_permission import IsRentOwnerOrReadOnly

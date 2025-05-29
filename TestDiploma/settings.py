@@ -60,6 +60,11 @@ INSTALLED_APPS = [
     #'apps.bookings.apps.BookingsConfig',
 
     'apps.user',
+    'apps.bookings',
+    'apps.managers',
+    #'apps.rent',
+    'apps.reviews',
+    'apps.search_and_filter',
 
 ]
 

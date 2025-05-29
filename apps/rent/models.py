@@ -16,7 +16,7 @@ class Rent(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     total_price = models.DecimalField(decimal_places=2, max_digits=6)
-    score = models.DecimalField(decimal_places=2, max_digits=1)
+    score = models.DecimalField(decimal_places=3, max_digits=5)
     reviews = models.PositiveIntegerField(default=0)
     is_deleted = models.BooleanField(default=False)
 
