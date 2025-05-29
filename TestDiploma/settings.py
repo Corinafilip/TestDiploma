@@ -51,20 +51,16 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
-    #'django_filters',
-    #'drf_yasg',
+    'django_filters',
+    'drf_yasg',
 
-    # local
+    # Local apps
     'apps.rent.apps.RentConfig',
-    #'apps.user.apps.UserConfig',
-    #'apps.bookings.apps.BookingsConfig',
-
-    'apps.user',
-    'apps.bookings',
-    'apps.managers',
-    #'apps.rent',
-    'apps.reviews',
-    'apps.search_and_filter',
+    'apps.user.apps.UserConfig',
+    'apps.bookings.apps.BookingsConfig',
+    'apps.managers.apps.ManagersConfig',
+    'apps.reviews.apps.ReviewsConfig',
+    'apps.search_and_filter.apps.SearchAndFilterConfig',
 
 ]
 

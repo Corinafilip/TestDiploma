@@ -32,3 +32,6 @@ class RentFilter(filters.FilterSet):
             Q(title__icontains=value) |
             Q(description__icontains=value)
         )
+
+
+
