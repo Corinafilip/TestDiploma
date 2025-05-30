@@ -103,11 +103,15 @@ if MYSQL:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': env('MYSQL_DB'),
-            'USER': env('MYSQL_USER'),
-            'PASSWORD': env('MYSQL_PASSWORD'),
+            #'NAME': env('MYSQL_DB'),
+            #'USER': env('MYSQL_USER'),
+            #'PASSWORD': env('MYSQL_PASSWORD'),
+            'NAME': 'HE_db',
+            'USER': 'admin_user',
+            'PASSWORD': 'admin_password',
             #'HOST': 'dbMySQL',
-            'HOST': '127.0.0.1',
+            #'HOST': '127.0.0.1',
+            'HOST': 'localhost',
             'PORT': 3306,
             'OPTIONS': {'init_command': 'SET sql_mode="STRICT_TRANS_TABLES" '},
         }
