@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from .models import User
 from django.contrib.auth.password_validation import validate_password
-
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.exceptions import AuthenticationFailed
+from django.contrib.auth import authenticate
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,3 +48,27 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate_new_password(self, value):
         validate_password(value)
         return value
+
+
+class MyCustomJWTSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        # Change these field names if you’re logging in with email
+        username = attrs.get('username')
+        password = attrs.get('password')
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+
+            if not user:
+                raise AuthenticationFailed('Invalid credentials')
+
+            refresh = self.get_token(user)
+
+            return {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+
+        raise AuthenticationFailed('Both "username" and "password" are required.')
+
+

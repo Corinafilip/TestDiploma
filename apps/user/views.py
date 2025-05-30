@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from .models import User
 from apps.rent.serializer import RentSerializer
 from apps.rent.models import Rent
-from .serializers import UserRegistrationSerializer, UserSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer, ChangePasswordSerializer
 from apps.user.owner_permission import IsRentOwnerOrReadOnly
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -16,6 +16,9 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 
 from apps.user.owner_permission import IsRentOwnerOrReadOnly
+
+from rest_framework_simplejwt.serializers import TokenObtain
+
 
 class RegisterUserAPIView(generics.CreateAPIView):
     queryset = User.objects.prefetch_related('rent_owner')

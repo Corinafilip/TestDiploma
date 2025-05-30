@@ -71,7 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'books.middleware.jwt_helper.JWTAuthenticationMiddleware',
+    'apps.user.jwt_helper.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'TestDiploma.urls'
@@ -180,7 +180,7 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_OBTAIN_SERIALIZER': 'books.serializers.MyCustomJWTSerializer'
+    'TOKEN_OBTAIN_SERIALIZER': 'apps.user.serializers.MyCustomJWTSerializer'
 }
 
 
