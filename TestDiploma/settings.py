@@ -106,7 +106,8 @@ if MYSQL:
             'NAME': env('MYSQL_DB'),
             'USER': env('MYSQL_USER'),
             'PASSWORD': env('MYSQL_PASSWORD'),
-            'HOST': 'dbMySQL',
+            #'HOST': 'dbMySQL',
+            'HOST': '127.0.0.1',
             'PORT': 3306,
             'OPTIONS': {'init_command': 'SET sql_mode="STRICT_TRANS_TABLES" '},
         }
