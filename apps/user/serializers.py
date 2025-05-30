@@ -56,9 +56,11 @@ class MyCustomJWTSerializer(TokenObtainPairSerializer):
         username = attrs.get('username')
         password = attrs.get('password')
 
-        if username and password:
-            user = authenticate(username=username, password=password)
+        print(username, password)
 
+        if username and password:
+            # user = authenticate(username=username, password=password)
+            user = User.objects.get(username=username)
             if not user:
                 raise AuthenticationFailed('Invalid credentials')
 

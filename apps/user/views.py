@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from .models import User
 from apps.rent.serializer import RentSerializer
 from apps.rent.models import Rent
-from .serializers import UserRegistrationSerializer, UserSerializer, ChangePasswordSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer, ChangePasswordSerializer, MyCustomJWTSerializer
 from apps.user.owner_permission import IsRentOwnerOrReadOnly
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -16,8 +16,11 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 
 from apps.user.owner_permission import IsRentOwnerOrReadOnly
+import logging
+logger = logging.getLogger(__name__)
 
-from rest_framework_simplejwt.serializers import TokenObtain
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class RegisterUserAPIView(generics.CreateAPIView):
@@ -25,13 +28,29 @@ class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserRegistrationSerializer
     permission_classes = [AllowAny]
 
+class LoginUserAPIView(APIView):
+    # queryset = User.objects.prefetch_related('rent_owner')
+    serializer_class = MyCustomJWTSerializer
+    permission_classes = [AllowAny]
+
 
 class CurrentUserAPIView(APIView):
+    # serializer_class = MyCustomJWTSerializer
+    # permission_classes = [IsAuthenticated]
+
+    # def get(self):
+    #     return self.request.user
+        # print("request", request, request.user, request.data)
+        # serializer = UserSerializer(request.user)
+        # return Response(serializer.data)
+
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        logger.info(f"User: {request.user} | Authenticated: {request.user.is_authenticated}")
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
