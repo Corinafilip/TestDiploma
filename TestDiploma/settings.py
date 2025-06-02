@@ -14,6 +14,8 @@ from pathlib import Path
 from environ import Env
 from datetime import timedelta
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+
 
 
     # 3-rd party
@@ -103,17 +106,19 @@ if MYSQL:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            #'NAME': env('MYSQL_DB'),
-            #'USER': env('MYSQL_USER'),
-            #'PASSWORD': env('MYSQL_PASSWORD'),
-            'NAME': 'HE_db',
-            'USER': 'admin_user',
+            'NAME': env('MYSQL_DB'),
+            'USER': env('MYSQL_USER'),
+            # 'PASSWORD': env('MYSQL_PASSWORD'),
+            # 'NAME': 'HE_db',
+            # 'USER': 'admin_user',
             'PASSWORD': 'admin_password',
+            'HOST': env('DATABASE_HOST', default='dbMySQL'),
+            'PORT': env('DATABASE_PORT', default='3306'),
             #'HOST': 'dbMySQL',
             #'HOST': '127.0.0.1',
-            'HOST': 'localhost',
-            'PORT': 3306,
-            'OPTIONS': {'init_command': 'SET sql_mode="STRICT_TRANS_TABLES" '},
+            # 'HOST': 'localhost',
+            # 'PORT': 3306,
+            'OPTIONS': {'init_command': 'SET sql_mode="STRICT_TRANS_TABLES" ' ,},
         }
     }
 else:

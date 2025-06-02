@@ -1,4 +1,4 @@
-version: '3'
+#version: '3'
 
 services:
   dbMySQL:
@@ -15,5 +15,26 @@ services:
       timeout: 5s
       retries: 3
 
+
+
+  backend:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      dbMySQL:
+        condition: service_healthy
+    environment:
+      - DJANGO_SETTINGS_MODULE=TestDiploma.settings
+      - DATABASE_HOST=dbMySQL
+    env_file:
+          - .env
 volumes:
   mysql_data: {}
+
+#.venv/bin/python manage.py runserver
