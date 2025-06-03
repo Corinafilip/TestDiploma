@@ -11,6 +11,7 @@ class RentFilter(filters.FilterSet):
     room_type = filters.CharFilter(field_name="room_type", lookup_expr='iexact')
     location = filters.CharFilter(field_name="address", lookup_expr='icontains')
     keyword = filters.CharFilter(method='filter_keyword')
+    total_price = filters.NumberFilter(field_name="total_price", lookup_expr="exact")
 
     ordering = filters.OrderingFilter(
         fields=(

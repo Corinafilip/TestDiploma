@@ -59,11 +59,11 @@ class ConfirmBookingView(APIView):
 
     def post(self, request, booking_id):
         try:
-            booking = Booking.objects.select_related('title__owner').get(id=booking_id)
+            booking = Booking.objects.get(id=booking_id)
         except Booking.DoesNotExist:
             return Response({"detail": "Booking not found."}, status=status.HTTP_404_NOT_FOUND)
 
-        if booking.title.owner != request.user:
+        if booking.owner != request.user:
             return Response({"detail": "You are not the owner of this rent."}, status=status.HTTP_403_FORBIDDEN)
 
         action = request.data.get('action')

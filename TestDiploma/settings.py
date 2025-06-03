@@ -108,19 +108,22 @@ if MYSQL:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': env('MYSQL_DB'),
             'USER': env('MYSQL_USER'),
-            # 'PASSWORD': env('MYSQL_PASSWORD'),
-            # 'NAME': 'HE_db',
-            # 'USER': 'admin_user',
-            'PASSWORD': 'admin_password',
-            'HOST': env('DATABASE_HOST', default='dbMySQL'),
-            'PORT': env('DATABASE_PORT', default='3306'),
-            #'HOST': 'dbMySQL',
-            #'HOST': '127.0.0.1',
-            # 'HOST': 'localhost',
-            # 'PORT': 3306,
+            'PASSWORD': env('MYSQL_PASSWORD'),
+            'HOST': env('MYSQL_HOST'),
+            'PORT': env('MYSQL_PORT', default='3306'),
             'OPTIONS': {'init_command': 'SET sql_mode="STRICT_TRANS_TABLES" ' ,},
         }
     }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': os.getenv("MYSQL_DB", "your_default_db"),
+    #         'USER': os.getenv("MYSQL_USER", "your_default_user"),
+    #         'PASSWORD': os.getenv("MYSQL_PASSWORD", "your_default_pass"),
+    #         'HOST': os.getenv("DATABASE_HOST", "dbMySQL"),  # <- important: use container name from docker-compose
+    #         'PORT': '3306',
+    #     }
+    # }
 else:
     DATABASES = {
         'default': {

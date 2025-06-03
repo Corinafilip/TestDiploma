@@ -19,10 +19,10 @@ class RentListCreateAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class RentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Rent.objects.all()
-    serializer_class = RentSerializer
-    permission_classes = [IsRentOwnerOrReadOnly]
+# class RentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+#    queryset = Rent.objects.all()
+#    serializer_class = RentSerializer
+#    permission_classes = [IsRentOwnerOrReadOnly]
 
 class RentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rent.objects.all()

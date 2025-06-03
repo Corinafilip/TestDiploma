@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/bookings/', include('apps.bookings.urls')),
     path('api/search/', include('apps.search_and_filter.urls')),
     path('api/rent/', include('apps.rent.urls')),
+   # path('api/reviews/', include('apps.reviews.urls')),
     # path('admin/', admin.site.urls),  # 👈 this is required
     # path('', include('apps.rent.urls')),  # or your app's urls
 
