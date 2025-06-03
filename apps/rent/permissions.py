@@ -30,9 +30,10 @@ class HasCompletedBooking(BasePermission):
             return False
 
         return Booking.objects.filter(
-            renter=request.user,
-            title_id=rent_id,
-            is_cancelled=False,
-            check_out__lt=request.timestamp  # only after checkout
+            # TODO will be implemented according to priorities
+            # renter=request.user,
+            # title_id=rent_id,
+            # is_cancelled=False,
+            # check_out__lt=request.timestamp  # only after checkout
         ).exists()
 

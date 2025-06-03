@@ -1,7 +1,7 @@
 from django.utils import timezone
 from rest_framework import generics, permissions
-from models import Review
-from serializers import ReviewSerializer
+from .models import Review
+from .serializers import ReviewSerializer
 from apps.rent.permissions import HasCompletedBooking
 from rest_framework import generics
 
